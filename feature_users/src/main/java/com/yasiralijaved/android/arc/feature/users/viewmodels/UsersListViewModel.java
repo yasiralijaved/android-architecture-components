@@ -1,7 +1,26 @@
 package com.yasiralijaved.android.arc.feature.users.viewmodels;
 
-import androidx.lifecycle.ViewModel;
+import android.app.Application;
 
-public class UsersListViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.MutableLiveData;
+
+import com.yasiralijaved.android.arc.core.SingleLiveEvent;
+
+public class UsersListViewModel extends AndroidViewModel {
+
+    private SingleLiveEvent<Void> goToUserDetailCommand = new SingleLiveEvent<>();
+
+    public UsersListViewModel(@NonNull Application application) {
+        super(application);
+    }
+
+    public MutableLiveData<Void> getUserDetailCommand() {
+        return goToUserDetailCommand;
+    }
+
+    public void goToUserDetail() {
+        goToUserDetailCommand.postValue(null);
+    }
 }
