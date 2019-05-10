@@ -18,6 +18,10 @@ android {
         }
     }
 
+    dataBinding {
+        enabled = true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -32,6 +36,10 @@ dependencies {
 
     /* Constraint Layout */
     api 'androidx.constraintlayout:constraintlayout:1.1.3'
+
+
+    /* Data Binding Common */
+    api 'androidx.databinding:databinding-common:3.4.0'
 
     /* Navigation Component */
     api 'android.arch.navigation:navigation-fragment:1.0.0'

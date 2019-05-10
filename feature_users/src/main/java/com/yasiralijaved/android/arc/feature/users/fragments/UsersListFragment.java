@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,7 @@ import android.view.ViewGroup;
 import com.yasiralijaved.android.arc.component.db.entities.UserEntity;
 import com.yasiralijaved.android.arc.core.utils.Resource;
 import com.yasiralijaved.android.arc.feature.users.R;
+import com.yasiralijaved.android.arc.feature.users.adapters.UsersAdapter;
 import com.yasiralijaved.android.arc.feature.users.databinding.UsersListFragmentBinding;
 import com.yasiralijaved.android.arc.feature.users.viewmodels.UsersListViewModel;
 
@@ -26,6 +29,7 @@ import java.util.List;
 public class UsersListFragment extends Fragment {
 
     private UsersListViewModel mViewModel;
+    private UsersAdapter mUserAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,7 +45,16 @@ public class UsersListFragment extends Fragment {
                 container,
                 false);
 
+
+        View rootView = binding.getRoot();
+        // Set RecyclerView Adapter
+        RecyclerView recyclerView = rootView.findViewById(R.id.rv_users);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mUserAdapter = new UsersAdapter(null);
+        recyclerView.setAdapter(mUserAdapter);
+
         binding.setViewmodel(mViewModel);
+
         return binding.getRoot();
     }
 
@@ -61,6 +74,7 @@ public class UsersListFragment extends Fragment {
             @Override
             public void onChanged(Resource<List<UserEntity>> listResource) {
                 List<UserEntity> users = listResource.data;
+                mUserAdapter.setData(users);
             }
         });
 
