@@ -10,7 +10,7 @@ import com.yasiralijaved.android.arc.component.db.dao.UserDao;
 import com.yasiralijaved.android.arc.component.db.entities.UserEntity;
 
 @Database(entities = {UserEntity.class},
-        version = 1)
+        version = 2)
 public abstract class MyDatabase extends RoomDatabase {
     private static volatile MyDatabase INSTANCE;
 

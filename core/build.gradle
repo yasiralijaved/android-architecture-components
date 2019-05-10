@@ -45,6 +45,9 @@ dependencies {
     api 'android.arch.navigation:navigation-fragment:1.0.0'
     api 'android.arch.navigation:navigation-ui:1.0.0'
 
+    /* Picasso */
+    api 'com.squareup.picasso:picasso:2.71828'
+
     /* Unit Test */
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'

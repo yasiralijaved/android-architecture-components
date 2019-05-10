@@ -77,7 +77,7 @@ public class UserRepository {
 
             @Override
             protected boolean shouldFetch(@Nullable List<UserEntity> data) {
-                return forceUpdate && (data == null || data.isEmpty());
+                return forceUpdate || data == null || data.isEmpty();
             }
 
             @NonNull

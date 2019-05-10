@@ -12,6 +12,7 @@ import com.yasiralijaved.android.arc.component.db.entities.UserEntity;
 import com.yasiralijaved.android.arc.core.repositories.UserRepository;
 import com.yasiralijaved.android.arc.core.utils.Resource;
 import com.yasiralijaved.android.arc.core.utils.SingleLiveEvent;
+import com.yasiralijaved.android.arc.core.utils.Status;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class UsersListViewModel extends AndroidViewModel {
 
     private SingleLiveEvent<Void> goToUserDetailCommand = new SingleLiveEvent<>();
     private MutableLiveData<Boolean> getUsersListCommand = new MutableLiveData<>();
+
 
     public UsersListViewModel(@NonNull Application application) {
         super(application);
@@ -32,7 +34,7 @@ public class UsersListViewModel extends AndroidViewModel {
     }
 
     public void goToUserDetail() {
-        //goToUserDetailCommand.postValue(true);
+        goToUserDetailCommand.postValue(null);
     }
     /* END - Launch UserEntity Detail */
 
@@ -40,9 +42,9 @@ public class UsersListViewModel extends AndroidViewModel {
     // Users List Observable Field
     private LiveData<Resource<List<UserEntity>>> usersListLiveData;
     public LiveData<Resource<List<UserEntity>>> getUsersListLiveData() {
-        if(usersListLiveData == null) usersListLiveData = new MutableLiveData<>();
         return usersListLiveData;
     }
+
 
     public void loadUsersList(boolean forceUpdate) {
         getUsersListCommand.setValue(forceUpdate);

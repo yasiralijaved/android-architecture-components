@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -18,8 +20,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.yasiralijaved.android.arc.component.db.entities.UserEntity;
 import com.yasiralijaved.android.arc.core.utils.Resource;
+import com.yasiralijaved.android.arc.core.utils.Status;
 import com.yasiralijaved.android.arc.feature.users.R;
 import com.yasiralijaved.android.arc.feature.users.adapters.UsersAdapter;
 import com.yasiralijaved.android.arc.feature.users.databinding.UsersListFragmentBinding;
@@ -30,80 +34,67 @@ import java.util.List;
 public class UsersListFragment extends Fragment {
 
     private UsersListViewModel mViewModel;
-    private UsersAdapter mUserAdapter;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mViewModel = ViewModelProviders.of(this).get(UsersListViewModel.class);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
+        if(getActivity() != null) {
+            getActivity().setTitle("People");
+        }
+
         UsersListFragmentBinding binding = DataBindingUtil.inflate(inflater,
                 R.layout.users_list_fragment,
                 container,
                 false);
 
-        mViewModel = ViewModelProviders.of(this).get(UsersListViewModel.class);
+        binding.setLifecycleOwner(this);
         binding.setViewmodel(mViewModel);
 
         View rootView = binding.getRoot();
         // Set RecyclerView Adapter
         RecyclerView recyclerView = rootView.findViewById(R.id.rv_users);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mUserAdapter = new UsersAdapter(null);
-        recyclerView.setAdapter(mUserAdapter);
 
-        mSwipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_users);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mViewModel.loadUsersList(true);
-            }
+        // Create and set User Adapter
+        UsersAdapter adapter = new UsersAdapter(null);
+        recyclerView.setAdapter(adapter);
+
+        // Initialize Swipe Refresh Functionality
+        SwipeRefreshLayout swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_users);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            // Load fresh data because user forcefully want fresh data
+            mViewModel.loadUsersList(true);
         });
 
-        return rootView;
+        return binding.getRoot();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        // Initially, load the cached data only
+        mViewModel.loadUsersList(false);
 
-        mViewModel.getUserDetailCommand().observe(getViewLifecycleOwner(), new Observer<Void>() {
-            @Override
-            public void onChanged(Void ignore) {
-                if (getView() != null)
-                    Navigation.findNavController(getView()).navigate(R.id.action_usersListFragment_to_userDetailFragment);
-            }
-        });
+        /* Handle API Error Messages */
+        mViewModel.getUsersListLiveData().observe(getViewLifecycleOwner(), resource -> {
+            if(resource.status == Status.ERROR) {
+                if(getView() != null) {
+                    Snackbar.make(getView(), resource.message != null ? resource.message : "Something went wrong!", Snackbar.LENGTH_LONG)
+                            .setAction("OK", v -> {
 
-        mViewModel.getUsersListLiveData().observe(this, new Observer<Resource<List<UserEntity>>>() {
-            @Override
-            public void onChanged(Resource<List<UserEntity>> resource) {
-                switch (resource.status) {
-                    case LOADING:
-                        mSwipeRefreshLayout.setRefreshing(true);
-                        mUserAdapter.setData(resource.data);
-                        break;
-                    case SUCCESS:
-                        mSwipeRefreshLayout.setRefreshing(false);
-                        mUserAdapter.setData(resource.data);
-                        break;
-                    case ERROR:
-                        mSwipeRefreshLayout.setRefreshing(false);
-                        break;
-                    default:
-                        break;
+                            }).show();
                 }
-
             }
         });
-
-        mViewModel.loadUsersList(true);
-
-
     }
 }

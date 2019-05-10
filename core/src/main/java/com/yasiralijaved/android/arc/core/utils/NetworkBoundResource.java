@@ -85,8 +85,17 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
                 });
             } else {
                 onFetchFailed();
+                String errorMessage = "Something went wrong. Please try again.";
+
+                if(response.errorMessage != null && response.errorMessage.contains("Unable to resolve host")) {
+                    errorMessage = "Server not accessible";
+                } else {
+                    errorMessage = response.errorMessage;
+                }
+
+                String finalErrorMessage = errorMessage;
                 result.addSource(dbSource,
-                        newData -> setValue(Resource.error(response.errorMessage, newData)));
+                        newData -> setValue(Resource.error(finalErrorMessage, newData)));
             }
         });
     }

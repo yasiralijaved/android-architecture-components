@@ -26,6 +26,8 @@ public class UserEntity {
 
     private String username;
 
+    private String photoUrl;
+
     public String getWebsite() {
         return website;
     }
@@ -74,17 +76,26 @@ public class UserEntity {
         this.username = username;
     }
 
-    public UserEntity(String id, String website, String phone, String name, String email, String username) {
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
+    public UserEntity(String id, String website, String phone, String name, String email, String username, String photoUrl) {
         this.id = id;
         this.website = website;
         this.phone = phone;
         this.name = name;
         this.email = email;
         this.username = username;
+        this.photoUrl = photoUrl;
     }
 
     @Override
     public String toString() {
-        return "UserEntity [website = " + website + ", phone = " + phone + ", name = " + name + ", id = " + id + ", email = " + email + ", username = " + username + "]";
+        return "UserEntity [website = " + website + ", phone = " + phone + ", name = " + name + ", id = " + id + ", email = " + email + ", username = " + username + ", photoUrl = " + photoUrl + "]";
     }
 }

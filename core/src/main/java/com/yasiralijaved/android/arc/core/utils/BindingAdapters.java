@@ -8,11 +8,9 @@ public class BindingAdapters {
 
     @BindingAdapter("data_adapter")
     public static <T> void setRecyclerViewAdapter(RecyclerView recyclerView, T items) {
-
-        if(items == null) return;
-
-        if(recyclerView.getAdapter() == null) {
-            ((DataAdapter<T>)recyclerView.getAdapter()).setData(items);
+        if(recyclerView.getAdapter() != null && recyclerView.getAdapter() instanceof DataAdapter) {
+            DataAdapter<T> adapter = (DataAdapter<T>) recyclerView.getAdapter();
+            adapter.setData(items);
         }
     }
 

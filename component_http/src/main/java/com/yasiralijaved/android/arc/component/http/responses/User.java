@@ -99,7 +99,8 @@ public class User {
                 response.getPhone(),
                 response.getName(),
                 response.getEmail(),
-                response.getUsername());
+                response.getUsername(),
+                "");
     }
 
     public static List<UserEntity> mapHttpResponse(List<User> response) {
@@ -111,7 +112,8 @@ public class User {
                     user.getPhone(),
                     user.getName(),
                     user.getEmail(),
-                    user.getUsername()));
+                    user.getUsername(),
+                    ""));
         }
         return userList;
     }
