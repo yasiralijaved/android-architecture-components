@@ -1,1 +1,1 @@
-include ':app', ':feature_users', ':core'
+include ':app', ':feature_users', ':core', ':component_http', ':component_db'

@@ -13,6 +13,6 @@
     </fragment>
     <fragment
         android:id="@+id/userDetailFragment"
-        android:name="com.yasiralijaved.android.arc.feature.users.UserDetailFragment"
+        android:name="com.yasiralijaved.android.arc.feature.users.fragments.UserDetailFragment"
         android:label="UserDetailFragment" />
 </navigation>

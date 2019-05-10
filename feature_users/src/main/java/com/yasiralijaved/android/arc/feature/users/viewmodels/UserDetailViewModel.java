@@ -1,4 +1,4 @@
-package com.yasiralijaved.android.arc.feature.users;
+package com.yasiralijaved.android.arc.feature.users.viewmodels;
 
 import android.app.Application;
 

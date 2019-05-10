@@ -15,13 +15,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yasiralijaved.android.arc.component.db.entities.UserEntity;
+import com.yasiralijaved.android.arc.core.utils.Resource;
 import com.yasiralijaved.android.arc.feature.users.R;
 import com.yasiralijaved.android.arc.feature.users.databinding.UsersListFragmentBinding;
 import com.yasiralijaved.android.arc.feature.users.viewmodels.UsersListViewModel;
 
+import java.util.List;
+
 public class UsersListFragment extends Fragment {
 
     private UsersListViewModel mViewModel;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mViewModel = ViewModelProviders.of(this).get(UsersListViewModel.class);
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -30,7 +40,7 @@ public class UsersListFragment extends Fragment {
                 R.layout.users_list_fragment,
                 container,
                 false);
-        mViewModel = ViewModelProviders.of(this).get(UsersListViewModel.class);
+
         binding.setViewmodel(mViewModel);
         return binding.getRoot();
     }
@@ -46,5 +56,17 @@ public class UsersListFragment extends Fragment {
                     Navigation.findNavController(getView()).navigate(R.id.action_usersListFragment_to_userDetailFragment);
             }
         });
+
+        mViewModel.getUsersListLiveData().observe(this, new Observer<Resource<List<UserEntity>>>() {
+            @Override
+            public void onChanged(Resource<List<UserEntity>> listResource) {
+                List<UserEntity> users = listResource.data;
+            }
+        });
+
+
+        mViewModel.loadUsersList(true);
+
+
     }
 }

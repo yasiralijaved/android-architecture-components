@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.yasiralijaved.android.arc.core;
+package com.yasiralijaved.android.arc.core.utils;
 
 import android.util.Log;
 

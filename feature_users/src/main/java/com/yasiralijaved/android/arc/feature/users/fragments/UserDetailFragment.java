@@ -1,4 +1,4 @@
-package com.yasiralijaved.android.arc.feature.users;
+package com.yasiralijaved.android.arc.feature.users.fragments;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.yasiralijaved.android.arc.feature.users.R;
+import com.yasiralijaved.android.arc.feature.users.viewmodels.UserDetailViewModel;
 
 public class UserDetailFragment extends Fragment {
 
