@@ -9,16 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.yasiralijaved.android.arc.component.db.entities.UserEntity;
+import com.yasiralijaved.android.arc.core.utils.DataAdapter;
 import com.yasiralijaved.android.arc.feature.users.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder> {
+public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder> implements DataAdapter<List<UserEntity>> {
 
     private List<UserEntity> userList;
     private UsersAdapterListener listener;
 
+    @Override
     public void setData(List<UserEntity> items) {
         if(items != null) {
             userList = new ArrayList<>(items);

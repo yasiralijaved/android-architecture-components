@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,21 +31,24 @@ public class UsersListFragment extends Fragment {
 
     private UsersListViewModel mViewModel;
     private UsersAdapter mUserAdapter;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(UsersListViewModel.class);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
         UsersListFragmentBinding binding = DataBindingUtil.inflate(inflater,
                 R.layout.users_list_fragment,
                 container,
                 false);
 
+        mViewModel = ViewModelProviders.of(this).get(UsersListViewModel.class);
+        binding.setViewmodel(mViewModel);
 
         View rootView = binding.getRoot();
         // Set RecyclerView Adapter
@@ -53,9 +57,15 @@ public class UsersListFragment extends Fragment {
         mUserAdapter = new UsersAdapter(null);
         recyclerView.setAdapter(mUserAdapter);
 
-        binding.setViewmodel(mViewModel);
+        mSwipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_users);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mViewModel.loadUsersList(true);
+            }
+        });
 
-        return binding.getRoot();
+        return rootView;
     }
 
     @Override
@@ -65,19 +75,32 @@ public class UsersListFragment extends Fragment {
         mViewModel.getUserDetailCommand().observe(getViewLifecycleOwner(), new Observer<Void>() {
             @Override
             public void onChanged(Void ignore) {
-                if(getView() != null)
+                if (getView() != null)
                     Navigation.findNavController(getView()).navigate(R.id.action_usersListFragment_to_userDetailFragment);
             }
         });
 
         mViewModel.getUsersListLiveData().observe(this, new Observer<Resource<List<UserEntity>>>() {
             @Override
-            public void onChanged(Resource<List<UserEntity>> listResource) {
-                List<UserEntity> users = listResource.data;
-                mUserAdapter.setData(users);
+            public void onChanged(Resource<List<UserEntity>> resource) {
+                switch (resource.status) {
+                    case LOADING:
+                        mSwipeRefreshLayout.setRefreshing(true);
+                        mUserAdapter.setData(resource.data);
+                        break;
+                    case SUCCESS:
+                        mSwipeRefreshLayout.setRefreshing(false);
+                        mUserAdapter.setData(resource.data);
+                        break;
+                    case ERROR:
+                        mSwipeRefreshLayout.setRefreshing(false);
+                        break;
+                    default:
+                        break;
+                }
+
             }
         });
-
 
         mViewModel.loadUsersList(true);
 
