@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/component_db/component_db.iml" filepath="$PROJECT_DIR$/component_db/component_db.iml" />
       <module fileurl="file://$PROJECT_DIR$/component_http/component_http.iml" filepath="$PROJECT_DIR$/component_http/component_http.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/feature_albums/feature_albums.iml" filepath="$PROJECT_DIR$/feature_albums/feature_albums.iml" />
       <module fileurl="file://$PROJECT_DIR$/feature_users/feature_users.iml" filepath="$PROJECT_DIR$/feature_users/feature_users.iml" />
     </modules>
   </component>

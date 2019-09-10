@@ -2,7 +2,7 @@ package com.yasiralijaved.android.arc.component.http;
 
 import androidx.lifecycle.LiveData;
 
-import com.yasiralijaved.android.arc.component.http.responses.User;
+import com.yasiralijaved.android.arc.component.http.response.User;
 
 import java.util.List;
 

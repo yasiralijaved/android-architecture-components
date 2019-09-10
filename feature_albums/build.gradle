@@ -1,9 +1,8 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 29
     defaultConfig {
-        applicationId "com.yasiralijaved.android.arc.components"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -29,14 +28,15 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':feature_users')
-
+    api project(path: ':core')
 
     /* Dagger2 - We are going to use dagger.android which includes
      * support for Activity and fragment injection so we need to include
      * the following dependencies */
     implementation 'com.google.dagger:dagger-android:2.17'
     implementation 'com.google.dagger:dagger-android-support:2.17'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.17'
 
     /* Dagger2 - default dependency */

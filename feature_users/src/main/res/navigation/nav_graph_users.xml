@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/usersListFragment"
-        android:name="com.yasiralijaved.android.arc.feature.users.fragments.UsersListFragment"
+        android:name="com.yasiralijaved.android.arc.feature.users.fragment.UsersListFragment"
         android:label="UsersListFragment" >
         <action
             android:id="@+id/action_usersListFragment_to_userDetailFragment"
@@ -13,6 +13,6 @@
     </fragment>
     <fragment
         android:id="@+id/userDetailFragment"
-        android:name="com.yasiralijaved.android.arc.feature.users.fragments.UserDetailFragment"
+        android:name="com.yasiralijaved.android.arc.feature.users.fragment.UserDetailFragment"
         android:label="UserDetailFragment" />
 </navigation>

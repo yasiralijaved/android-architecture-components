@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.yasiralijaved.android.arc.component.db.entities.UserEntity;
+import com.yasiralijaved.android.arc.component.db.entity.UserEntity;
 
 import java.util.List;
 

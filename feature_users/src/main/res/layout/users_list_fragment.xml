@@ -7,13 +7,13 @@
 
         <variable
             name="viewmodel"
-            type="com.yasiralijaved.android.arc.feature.users.viewmodels.UsersListViewModel" />
+            type="com.yasiralijaved.android.arc.feature.users.viewmodel.UsersListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.UsersListFragment">
+        tools:context=".fragment.UsersListFragment">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh_users"

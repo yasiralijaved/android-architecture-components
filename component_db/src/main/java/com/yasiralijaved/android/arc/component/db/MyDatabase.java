@@ -4,7 +4,7 @@ import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
 import com.yasiralijaved.android.arc.component.db.dao.UserDao;
-import com.yasiralijaved.android.arc.component.db.entities.UserEntity;
+import com.yasiralijaved.android.arc.component.db.entity.UserEntity;
 
 @Database(entities = {UserEntity.class},
         version = 2)
