@@ -35,6 +35,16 @@ dependencies {
     /* Gson */
     api 'com.google.code.gson:gson:2.8.5'
 
+    /* Dagger2 - We are going to use dagger.android which includes
+     * support for Activity and fragment injection so we need to include
+     * the following dependencies */
+    implementation 'com.google.dagger:dagger-android:2.17'
+    implementation 'com.google.dagger:dagger-android-support:2.17'
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.17'
+
+    /* Dagger2 - default dependency */
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.17'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'

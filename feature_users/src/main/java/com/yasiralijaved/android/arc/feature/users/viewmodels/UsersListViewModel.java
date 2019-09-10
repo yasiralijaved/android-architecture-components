@@ -1,31 +1,38 @@
 package com.yasiralijaved.android.arc.feature.users.viewmodels;
 
-import android.app.Application;
-
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
+import androidx.lifecycle.ViewModel;
 
+import com.yasiralijaved.android.arc.component.db.dao.UserDao;
 import com.yasiralijaved.android.arc.component.db.entities.UserEntity;
+import com.yasiralijaved.android.arc.component.http.BackendService;
 import com.yasiralijaved.android.arc.core.repositories.UserRepository;
 import com.yasiralijaved.android.arc.core.utils.Resource;
 import com.yasiralijaved.android.arc.core.utils.SingleLiveEvent;
-import com.yasiralijaved.android.arc.core.utils.Status;
 
 import java.util.List;
 
-public class UsersListViewModel extends AndroidViewModel {
+import javax.inject.Inject;
 
+public class UsersListViewModel extends ViewModel {
+
+    private UserRepository mUserRepository;
     private SingleLiveEvent<Void> goToUserDetailCommand = new SingleLiveEvent<>();
     private MutableLiveData<Boolean> getUsersListCommand = new MutableLiveData<>();
 
 
-    public UsersListViewModel(@NonNull Application application) {
-        super(application);
+    /*
+     * We are injecting the UserDao class
+     * and the BackendService class to the ViewModel.
+     * */
+    @Inject
+    public UsersListViewModel(UserDao userDao, BackendService backendService) {
+        super();
+        mUserRepository = new UserRepository(userDao, backendService);
         usersListLiveData = Transformations.switchMap(getUsersListCommand,
-                forceUpdate -> UserRepository.getInstance(application.getApplicationContext()).getUsersList(forceUpdate));
+                forceUpdate -> mUserRepository.getUsersList(forceUpdate));
     }
 
     /* START - Launch UserEntity Detail */
