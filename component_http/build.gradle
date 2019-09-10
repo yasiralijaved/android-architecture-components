@@ -1,17 +1,13 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
-
-
+    compileSdkVersion 29
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -31,10 +27,10 @@ dependencies {
     api project(path: ':component_db')
 
     /* Retrofit */
-    api 'com.squareup.retrofit2:retrofit:2.5.0'
-    api 'com.squareup.retrofit2:converter-gson:2.5.0'
-    api 'com.squareup.okhttp3:logging-interceptor:3.10.0'
-    api 'com.squareup.okhttp3:okhttp:3.12.0'
+    api 'com.squareup.retrofit2:retrofit:2.6.1'
+    api 'com.squareup.retrofit2:converter-gson:2.6.1'
+    api 'com.squareup.okhttp3:logging-interceptor:4.1.0'
+    api 'com.squareup.okhttp3:okhttp:4.1.1'
 
     /* Gson */
     api 'com.google.code.gson:gson:2.8.5'

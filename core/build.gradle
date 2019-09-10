@@ -1,14 +1,13 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -39,7 +38,7 @@ dependencies {
 
 
     /* Data Binding Common */
-    api 'androidx.databinding:databinding-common:3.4.0'
+    api 'androidx.databinding:databinding-common:3.5.0'
 
     /* Navigation Component */
     api 'android.arch.navigation:navigation-fragment:1.0.0'

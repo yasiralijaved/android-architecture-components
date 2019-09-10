@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
@@ -35,9 +35,9 @@ android {
 
 dependencies {
     // Room components
-    api "androidx.room:room-runtime:2.1.0-alpha07"
-    annotationProcessor "androidx.room:room-compiler:2.1.0-alpha07"
-    androidTestImplementation "androidx.room:room-testing:2.1.0-alpha07"
+    api "androidx.room:room-runtime:2.2.0-beta01"
+    annotationProcessor "androidx.room:room-compiler:2.2.0-beta01"
+    androidTestImplementation "androidx.room:room-testing:2.2.0-beta01"
 
     /* LiveData */
     api 'androidx.lifecycle:lifecycle-livedata:2.0.0'

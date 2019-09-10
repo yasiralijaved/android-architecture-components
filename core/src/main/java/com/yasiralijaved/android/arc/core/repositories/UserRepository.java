@@ -29,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UserRepository {
 
-    private static UserRepository _repository;
+    private static UserRepository mInstance;
     private static BackendService mBackendService;
 
     private UserDao mUserDao;
@@ -37,9 +37,9 @@ public class UserRepository {
     private UserRepository() {}
 
     public synchronized static UserRepository getInstance(Context context) {
-        if (_repository == null) {
-            _repository = new UserRepository();
-            _repository.mUserDao = MyDatabase.getDatabase(context).userDao();
+        if (mInstance == null) {
+            mInstance = new UserRepository();
+            mInstance.mUserDao = MyDatabase.getDatabase(context).userDao();
 
             OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
 
@@ -64,7 +64,7 @@ public class UserRepository {
             mBackendService = retrofit.create(BackendService.class);
 
         }
-        return _repository;
+        return mInstance;
     }
 
     public LiveData<Resource<List<UserEntity>>> getUsersList(boolean forceUpdate) {
