@@ -3,28 +3,14 @@ package com.yasiralijaved.android.arc.component.db;
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
+import com.yasiralijaved.android.arc.component.db.dao.AlbumDao;
 import com.yasiralijaved.android.arc.component.db.dao.UserDao;
+import com.yasiralijaved.android.arc.component.db.entity.AlbumEntity;
 import com.yasiralijaved.android.arc.component.db.entity.UserEntity;
 
-@Database(entities = {UserEntity.class},
-        version = 2)
+@Database(entities = {UserEntity.class, AlbumEntity.class},
+        version = 3)
 public abstract class MyDatabase extends RoomDatabase {
-    //private static volatile MyDatabase INSTANCE;
-
-//    public static MyDatabase getDatabase(final Context context) {
-//        if (INSTANCE == null) {
-//            synchronized (MyDatabase.class) {
-//                if (INSTANCE == null) {
-//                    // Create database here
-//                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-//                            MyDatabase.class, "my_database")
-//                            .fallbackToDestructiveMigration()
-//                            .build();
-//                }
-//            }
-//        }
-//        return INSTANCE;
-//    }
-
     public abstract UserDao userDao();
+    public abstract AlbumDao albumDao();
 }
