@@ -5,7 +5,8 @@ import android.app.Application;
 import com.yasiralijaved.android.arc.component.db.di.DbModule;
 import com.yasiralijaved.android.arc.component.http.di.BackendServiceModule;
 import com.yasiralijaved.android.arc.components.MyApplication;
-import com.yasiralijaved.android.arc.feature.users.di.ViewModelModule;
+import com.yasiralijaved.android.arc.feature.albums.di.AlbumsViewModelModule;
+import com.yasiralijaved.android.arc.feature.users.di.UsersViewModelModule;
 
 import javax.inject.Singleton;
 
@@ -16,10 +17,10 @@ import dagger.android.support.AndroidSupportInjectionModule;
 @Component(modules = {
         BackendServiceModule.class,
         DbModule.class,
-        ViewModelModule.class,
         ActivityModule.class,
-        FragmentModule.class,
-        AndroidSupportInjectionModule.class})
+        AndroidSupportInjectionModule.class,
+        UsersViewModelModule.class,
+        AlbumsViewModelModule.class,})
 @Singleton
 public interface AppComponent {
 

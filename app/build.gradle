@@ -30,6 +30,7 @@ android {
 
 dependencies {
     implementation project(path: ':feature_users')
+    implementation project(path: ':feature_albums')
 
 
     /* Dagger2 - We are going to use dagger.android which includes

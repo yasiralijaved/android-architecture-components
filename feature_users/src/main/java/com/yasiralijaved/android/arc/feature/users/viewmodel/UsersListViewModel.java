@@ -1,7 +1,5 @@
 package com.yasiralijaved.android.arc.feature.users.viewmodel;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
@@ -58,10 +56,4 @@ public class UsersListViewModel extends ViewModel {
         getUsersListCommand.setValue(forceUpdate);
     }
     /* END - Get Users List */
-
-    @Override
-    protected void onCleared() {
-        super.onCleared();
-        Log.d("UsersListViewModel", "onCleared: Hashcode= " + this.hashCode());
-    }
 }

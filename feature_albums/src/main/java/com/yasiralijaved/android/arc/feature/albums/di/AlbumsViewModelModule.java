@@ -1,18 +1,18 @@
-package com.yasiralijaved.android.arc.feature.users.di;
+package com.yasiralijaved.android.arc.feature.albums.di;
 
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.yasiralijaved.android.arc.core.di.ViewModelFactory;
 import com.yasiralijaved.android.arc.core.di.ViewModelKey;
-import com.yasiralijaved.android.arc.feature.users.viewmodel.UsersListViewModel;
+import com.yasiralijaved.android.arc.feature.albums.viewmodel.AlbumsViewModel;
 
 import dagger.Binds;
 import dagger.Module;
 import dagger.multibindings.IntoMap;
 
 @Module
-public abstract class ViewModelModule {
+public abstract class AlbumsViewModelModule {
 
     @Binds
     abstract ViewModelProvider.Factory bindViewModelFactory(ViewModelFactory factory);
@@ -29,6 +29,6 @@ public abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(UsersListViewModel.class)
-    protected abstract ViewModel usersListViewModel(UsersListViewModel usersListViewModel);
+    @ViewModelKey(AlbumsViewModel.class)
+    protected abstract ViewModel albumsViewModel(AlbumsViewModel albumsViewModel);
 }

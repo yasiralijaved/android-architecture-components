@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.room.Room;
 
 import com.yasiralijaved.android.arc.component.db.MyDatabase;
+import com.yasiralijaved.android.arc.component.db.dao.AlbumDao;
 import com.yasiralijaved.android.arc.component.db.dao.UserDao;
 
 import javax.inject.Singleton;
@@ -29,5 +30,11 @@ public class DbModule {
     @Singleton
     UserDao provideUserDao(@NonNull MyDatabase database) {
         return database.userDao();
+    }
+
+    @Provides
+    @Singleton
+    AlbumDao provideAlbumDao(@NonNull MyDatabase database) {
+        return database.albumDao();
     }
 }

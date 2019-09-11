@@ -35,8 +35,6 @@ dependencies {
      * the following dependencies */
     implementation 'com.google.dagger:dagger-android:2.17'
     implementation 'com.google.dagger:dagger-android-support:2.17'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.17'
 
     /* Dagger2 - default dependency */
