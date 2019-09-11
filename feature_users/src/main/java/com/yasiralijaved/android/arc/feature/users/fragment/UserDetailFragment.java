@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yasiralijaved.android.arc.feature.albums.fragment.AlbumsFragment;
 import com.yasiralijaved.android.arc.feature.users.R;
 import com.yasiralijaved.android.arc.feature.users.viewmodel.UserDetailViewModel;
 
@@ -26,14 +27,17 @@ public class UserDetailFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.user_detail_fragment, container, false);
+        View root = inflater.inflate(R.layout.user_detail_fragment, container, false);
+        AlbumsFragment albumsFragment = new AlbumsFragment();
+        getChildFragmentManager().beginTransaction().add(R.id.content_parent, albumsFragment).commit();
+        return root;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(UserDetailViewModel.class);
-        // TODO: Use the ViewModel
+        setHasOptionsMenu(true);
     }
 
 }

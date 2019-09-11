@@ -76,11 +76,11 @@ public class UsersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 break;
             case TYPE_ITEM:
                 View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_row_item, parent, false);
-                viewHolder = new UserViewHolder(itemView);
+                viewHolder = new UserViewHolder(itemView, this.listener);
                 break;
             default:
                 View defaultView = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_row_item, parent, false);
-                viewHolder = new UserViewHolder(defaultView);
+                viewHolder = new UserViewHolder(defaultView, this.listener);
                 break;
         }
         return viewHolder;
@@ -119,22 +119,32 @@ public class UsersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     public interface UsersAdapterListener {
-        void onUserClicked(UserEntity user);
+        void onUserClicked(View view, int position, UserEntity user);
     }
 
-    class UserViewHolder extends RecyclerView.ViewHolder {
+    class UserViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final ImageView ivUserPhoto;
         private final TextView tvUserName;
         private final TextView tvUserEmail;
         private final TextView tvUserPhone;
+        private final UsersAdapterListener listener;
 
-        UserViewHolder(final View rootView) {
+        UserViewHolder(final View rootView, UsersAdapterListener listener) {
             super(rootView);
             this.ivUserPhoto = rootView.findViewById(R.id.iv_user_photo);
             this.tvUserName = rootView.findViewById(R.id.tv_user_name);
             this.tvUserEmail = rootView.findViewById(R.id.tv_user_email);
             this.tvUserPhone = rootView.findViewById(R.id.tv_user_phone);
+            this.listener = listener;
+            rootView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if(this.listener != null && userList != null && userList.size() > getAdapterPosition()) {
+                this.listener.onUserClicked(view, getAdapterPosition(), userList.get(getAdapterPosition()));
+            }
         }
     }
 

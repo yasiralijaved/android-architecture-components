@@ -45,9 +45,6 @@ public class AlbumsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        if(getActivity() != null) {
-            getActivity().setTitle("Albums");
-        }
 
         AlbumsFragmentBinding binding = DataBindingUtil.inflate(inflater,
                 R.layout.albums_fragment,

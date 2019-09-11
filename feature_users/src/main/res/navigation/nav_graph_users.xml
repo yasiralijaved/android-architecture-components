@@ -6,7 +6,7 @@
     <fragment
         android:id="@+id/usersListFragment"
         android:name="com.yasiralijaved.android.arc.feature.users.fragment.UsersListFragment"
-        android:label="UsersListFragment" >
+        android:label="People" >
         <action
             android:id="@+id/action_usersListFragment_to_userDetailFragment"
             app:destination="@id/userDetailFragment" />

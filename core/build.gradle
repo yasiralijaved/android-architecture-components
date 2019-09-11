@@ -42,8 +42,8 @@ dependencies {
     api 'androidx.databinding:databinding-common:3.5.0'
 
     /* Navigation Component */
-    api 'android.arch.navigation:navigation-fragment:1.0.0'
-    api 'android.arch.navigation:navigation-ui:1.0.0'
+    api 'androidx.navigation:navigation-fragment:2.1.0'
+    api 'androidx.navigation:navigation-ui:2.1.0'
 
     /* Picasso */
     api 'com.squareup.picasso:picasso:2.71828'

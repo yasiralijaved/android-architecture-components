@@ -1,24 +1,24 @@
 package com.yasiralijaved.android.arc.feature.users.fragment;
 
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.google.android.material.snackbar.Snackbar;
+import com.yasiralijaved.android.arc.component.db.entity.UserEntity;
 import com.yasiralijaved.android.arc.core.di.ViewModelFactory;
 import com.yasiralijaved.android.arc.core.utils.Status;
 import com.yasiralijaved.android.arc.feature.users.R;
@@ -30,7 +30,7 @@ import javax.inject.Inject;
 
 import dagger.android.support.AndroidSupportInjection;
 
-public class UsersListFragment extends Fragment {
+public class UsersListFragment extends Fragment implements UsersAdapter.UsersAdapterListener {
 
     @Inject
     ViewModelFactory viewModelFactory;
@@ -47,10 +47,6 @@ public class UsersListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
-        if(getActivity() != null) {
-            getActivity().setTitle("People");
-        }
 
         UsersListFragmentBinding binding = DataBindingUtil.inflate(inflater,
                 R.layout.users_list_fragment,
@@ -69,7 +65,7 @@ public class UsersListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // Create and set User Adapter
-        UsersAdapter adapter = new UsersAdapter(null);
+        UsersAdapter adapter = new UsersAdapter(this);
         recyclerView.setAdapter(adapter);
 
         // Initialize Swipe Refresh Functionality
@@ -99,5 +95,12 @@ public class UsersListFragment extends Fragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onUserClicked(View view, int position, UserEntity user) {
+        if(view != null) {
+            Navigation.findNavController(view).navigate(R.id.action_usersListFragment_to_userDetailFragment);
+        }
     }
 }
