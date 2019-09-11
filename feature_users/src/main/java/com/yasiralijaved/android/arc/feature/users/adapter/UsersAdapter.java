@@ -48,7 +48,7 @@ public class UsersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
                 if (!TextUtils.equals(lastHeader, header)) {
                     lastHeader = header;
-                    fullUserList.add(new UserEntity("-1", "", "", header, "", "", ""));
+                    fullUserList.add(new UserEntity(-1, "", "", header, "", "", ""));
                 }
 
                 String photoUrl = String.format("https://randomuser.me/api/portraits/%s/%s.jpg", i%2 == 0 ? "men" : "women", i+10);
@@ -111,7 +111,7 @@ public class UsersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public int getItemViewType(int position) {
-        if (userList.get(position).getId().equalsIgnoreCase("-1")) {
+        if (userList.get(position).getId() == -1) {
             return TYPE_HEADER;
         } else {
             return TYPE_ITEM;

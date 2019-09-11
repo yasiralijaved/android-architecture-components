@@ -9,7 +9,7 @@ import com.yasiralijaved.android.arc.component.db.entity.AlbumEntity;
 import com.yasiralijaved.android.arc.component.db.entity.UserEntity;
 
 @Database(entities = {UserEntity.class, AlbumEntity.class},
-        version = 3)
+        version = 4)
 public abstract class MyDatabase extends RoomDatabase {
     public abstract UserDao userDao();
     public abstract AlbumDao albumDao();

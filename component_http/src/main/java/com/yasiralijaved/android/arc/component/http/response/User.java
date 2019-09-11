@@ -17,7 +17,7 @@ public class User {
 
     private Company company;
 
-    private String id;
+    private int id;
 
     private String email;
 
@@ -63,11 +63,11 @@ public class User {
         this.company = company;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

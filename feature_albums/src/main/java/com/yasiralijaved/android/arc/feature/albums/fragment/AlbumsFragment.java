@@ -34,6 +34,15 @@ public class AlbumsFragment extends Fragment {
     ViewModelFactory viewModelFactory;
 
     private AlbumsViewModel mViewModel;
+    private int userId;
+
+    public static AlbumsFragment newInstance(int userId) {
+        return new AlbumsFragment(userId);
+    }
+
+    private AlbumsFragment(int userId) {
+        this.userId = userId;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,14 +82,19 @@ public class AlbumsFragment extends Fragment {
             mViewModel.loadAlbumsList(true, 1);
         });
 
+
         return binding.getRoot();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        loadAlbumsForUser(userId);
+    }
+
+    private void loadAlbumsForUser(int userId) {
         // Initially, load the cached data only
-        mViewModel.loadAlbumsList(false, 1);
+        mViewModel.loadAlbumsList(false, userId);
     }
 
 }

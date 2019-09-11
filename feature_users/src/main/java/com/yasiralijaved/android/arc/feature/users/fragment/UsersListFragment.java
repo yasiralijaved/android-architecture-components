@@ -100,7 +100,13 @@ public class UsersListFragment extends Fragment implements UsersAdapter.UsersAda
     @Override
     public void onUserClicked(View view, int position, UserEntity user) {
         if(view != null) {
-            Navigation.findNavController(view).navigate(R.id.action_usersListFragment_to_userDetailFragment);
+
+//            UsersListFragmentDirections.ActionUserDetail action =
+//                    UsersListFragmentDirections.actionUserDetail(user);
+
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("user", user);
+            Navigation.findNavController(view).navigate(R.id.action_user_detail, bundle);
         }
     }
 }
